@@ -1,0 +1,7 @@
+{
+	"name": "Postgresql",
+	"port": 5432,
+	"username": "masondaven",
+	"password": "9937604",
+	"database": "budgetfunds"
+}

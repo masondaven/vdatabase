@@ -8,8 +8,11 @@
   },
   "author": "Mason Davenport",
   "license": "ISC",
-	"bin": {
-	  "vBase": "./index.js"
-	}
-
+  "bin": {
+    "vdatabase": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "pg": "^4.5.3"
+  }
 }

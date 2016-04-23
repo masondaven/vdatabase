@@ -1,0 +1,15 @@
+{
+  "name": "vdatabase",
+  "version": "0.0.1",
+  "description": "A command line tool for generating a visual database admin page in browser for quick editing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mason Davenport",
+  "license": "ISC",
+	"bin": {
+	  "vBase": "./index.js"
+	}
+
+}

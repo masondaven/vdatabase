@@ -17,17 +17,36 @@ program
 		// check for supported database
 		else if (jc.name !== "MongoDB" && jc.name !== "Postgresql") {
 			console.log("Unsupported Database: Currently supporting MongoDB and Postgresql");
-		} 
+		}
+		// connect to postgresql
 		else if (jc.name === "Postgresql") {
 			var pg = require('pg');
-			var connectionString = 'postgres://' + jc.username + ':' + jc.password + '@localhost/' + jc.database;
+			var connString = 'postgres://' + jc.username + ':' + jc.password + '@localhost/' + jc.database;
 
-			pg.connect(conString, function(err, client, done) {
+			pg.connect(connString, function(err, client, done) {
 			  if(err) {
-			  	console.log("There was an error connecting to the database");
-			  }
-			  console.log("Successfully connected to the database");
+			  	console.log(JSON.stringify(err));
+			  	if (err.code === "28000") {
+			  		console.log("Invalid username and password combination");
+			  	} else if (err.code === "3D000") {
+			  		console.log("Unable to connect to specified database");
+			  	}
+			  	done();
+			  } else {
+					console.log("Successfully connected to the database");
+
+					// Get all table names in database
+					client.query("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';", function(err, result) {
+						var table_names = [];
+						result.rows.forEach(function(t) {
+							table_names.push(t.table_name);
+						});
+						console.log(String(table_names));
+					});
+					done();
+				}
 			});
+			pg.end();
 		}
 	})
 	.parse(process.argv);

@@ -1,7 +1,7 @@
 {
 	"name": "Postgresql",
 	"port": 5432,
-	"username": "masondaven",
+	"username": "mason",
 	"password": "9937604",
 	"database": "budgetfunds"
 }
